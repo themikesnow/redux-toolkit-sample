@@ -9,15 +9,17 @@ interface ContainerProps {
 const Container: React.FC<ContainerProps> = ({ children }: ContainerProps) => {
   return (
     <div className="
-      px-5
+      p-10
       dark:bg-gray-800
       grid
       grid-cols-1
-      gap-4
+      gap-6
       sm:grid-cols-2
-      md:grid-cols-4
+      lg:grid-cols-3
+      xl:grid-cols-4
       justify-center
-      h-screen
+      min-h-screen
+      grid-rows-3
     ">
       {children}
     </div>

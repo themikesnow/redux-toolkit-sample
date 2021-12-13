@@ -1,8 +1,8 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
 import LightDarkToggle from '../Toggle/LightDarkToggle';
-import { Colors } from '../../constants/Styles';
-import { useTheme } from '../../hooks/theme-hook';
+import { Colors } from '../../../constants/Styles';
+import { useTheme } from '../../../hooks/theme-hook';
 
 
 interface NavbarProps {

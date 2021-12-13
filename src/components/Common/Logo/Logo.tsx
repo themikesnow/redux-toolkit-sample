@@ -1,7 +1,7 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Colors } from '../../constants/Styles';
-import { useTheme } from '../../hooks/theme-hook';
+import { Colors } from '../../../constants/Styles';
+import { useTheme } from '../../../hooks/theme-hook';
 
 interface LogoProps {
   className?: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MoonIcon, SunIcon, PencilIcon, TrashIcon } from '@heroicons/react/outline';
+import { MoonIcon, SunIcon, PencilIcon, TrashIcon, ExclamationCircleIcon } from '@heroicons/react/outline';
 import classnames from 'classnames';
 
 const defaultClass = 'h-5 w-5';
@@ -9,6 +9,7 @@ export enum IconType {
   LIGHT_THEME,
   DARK_THEME,
   DELETE,
+  CONFIRM,
 }
 
 interface IconProps {
@@ -33,6 +34,10 @@ const Icon: React.FC<IconProps> = ({ type, onClick, className = '' }: IconProps)
     case IconType.DELETE:
       theIcon = <TrashIcon className={classnames(defaultClass, {[className]: !!className })} />;
       break;
+    case IconType.CONFIRM:
+      theIcon = <ExclamationCircleIcon className={classnames(defaultClass, {[className]: !!className })} />;
+      break;
+      
     default:
       return null;
   }

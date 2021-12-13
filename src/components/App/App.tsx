@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import Navbar from '../Navbar/Navbar';
-import Person from '../Person/Person';
-import Container from '../Container/Container';
-import Modal from '..//Modal/Modal';
+import Navbar from '../Common/Navbar/Navbar';
+// import Person from '../Person/Person';
+import Container from '../Common//Container/Container';
+import Modal from '../Common/Modal/Modal';
 import { useTheme } from '../../hooks/theme-hook';
+import  Persons from '../../features/person/Persons';
 
 import IPerson from '../../types/IPerson';
 
@@ -24,7 +25,8 @@ function App() {
     <div className={classnames(theme, 'bg-gray-100 w-full min-h-screen m-0 font-sans subpixel-antialiased')}>
       <Navbar onToggleMode={(isEnabled: boolean) => { setTheme(theme === 'light' ? 'dark' : 'light'); }}/>
       <Container>
-        <Person person={person} onEdit={onEdit}/>
+        {/* <Person person={person} onEdit={onEdit}/> */}
+        <Persons />
       </Container>
       {/* <Modal /> */}
     </div>

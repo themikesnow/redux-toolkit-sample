@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon, { IconType } from '../Icon/Icon';
+import Icon, { IconType } from '../../components/Common/Icon/Icon';
 import IPerson from '../../types/IPerson';
 import { Colors } from '../../constants/Styles';
 import { useTheme } from '../../hooks/theme-hook';
@@ -7,23 +7,21 @@ import { useTheme } from '../../hooks/theme-hook';
 interface PersonProps {
   person: IPerson,
   onEdit: (person: IPerson) => void,
+  onDelete: (person: IPerson) => void,
 }
 
-const Person: React.FC<PersonProps> = ({ person, onEdit }: PersonProps) => {
+const Person: React.FC<PersonProps> = ({ person, onEdit, onDelete }: PersonProps) => {
   const [theme] = useTheme();
   return (
     <div className={`
-      max-h-44
-      py-4
-      px-4
-      my-20
-      h-screen
+      p-4
+      max-h-60
       shadow-lg
       rounded-lg
       text-center
       bg-${Colors[theme].secondary}
     `}>
-      <div className="flex justify-center md:justify-center -mt-16">
+      <div className="flex justify-center md:justify-center -smt-16">
         <img
           alt="Profile"
           className={`
@@ -34,7 +32,7 @@ const Person: React.FC<PersonProps> = ({ person, onEdit }: PersonProps) => {
             border-2
             border-${Colors[theme].primary}
           `}
-          src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"
+          src={`https://randomuser.me/api/portraits/med/men/${person.id}.jpg`}
         />
       </div>
       <div>
@@ -67,7 +65,7 @@ const Person: React.FC<PersonProps> = ({ person, onEdit }: PersonProps) => {
       `}>
         <Icon
           type={IconType.DELETE}
-          onClick={(event) => { onEdit(person); }}
+          onClick={(event) => { onDelete(person); }}
           className={`
             hover:text-${Colors[theme].tertiaryTextHover}
             dark:hover:text-${Colors[theme].primaryTextHover}

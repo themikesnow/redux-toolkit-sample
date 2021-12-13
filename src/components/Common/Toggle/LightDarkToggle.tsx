@@ -1,6 +1,6 @@
 import { MoonIcon, SunIcon } from '@heroicons/react/outline';
-import { Colors } from '../../constants/Styles';
-import { useTheme } from '../../hooks/theme-hook';
+import { Colors } from '../../../constants/Styles';
+import { useTheme } from '../../../hooks/theme-hook';
 
 
 interface LightDarkToggleProps {
