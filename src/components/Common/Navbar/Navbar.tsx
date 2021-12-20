@@ -11,6 +11,7 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ onToggleMode }: NavbarProps) => {
   const [theme] = useTheme();
+  console.log('THEME', theme);
   return (
     <header
       className={`

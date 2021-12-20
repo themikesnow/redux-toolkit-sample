@@ -10,15 +10,14 @@ import IPerson from '../../../../types/IPerson';
 
 
 
-interface DeleteModalProps {
+interface EditModalProps {
   className?: string;
   person: IPerson;
-  onDelete: (person: IPerson) => void,
+  onSave: (person: IPerson) => void,
   onCancel: () => void,
-  // onClick?: (event: React.MouseEvent<HTMLElement>) => void,
 }
 
-const DeleteModal: React.FC<DeleteModalProps> = ({ className = '', person, onDelete, onCancel }: DeleteModalProps) => {
+const EditModal: React.FC<EditModalProps> = ({ className = '', person, onSave, onCancel }: EditModalProps) => {
   const [theme] = useTheme();
   if (!person) {
     return null;
@@ -26,7 +25,7 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ className = '', person, onDel
 
   return (
     <Modal
-      onOk={() => { onDelete(person); }}
+      onOk={() => { onSave(person); }}
       onCancel={onCancel}
     >
       <div className="flex justify-center">
@@ -61,4 +60,4 @@ const DeleteModal: React.FC<DeleteModalProps> = ({ className = '', person, onDel
   );
 }
 
-export default DeleteModal;
+export default EditModal;

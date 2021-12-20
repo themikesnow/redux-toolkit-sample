@@ -3,15 +3,24 @@ import Icon, { IconType } from '../../components/Common/Icon/Icon';
 import IPerson from '../../types/IPerson';
 import { Colors } from '../../constants/Styles';
 import { useTheme } from '../../hooks/theme-hook';
+import classNames from 'classnames';
 
 interface PersonProps {
-  person: IPerson,
-  onEdit: (person: IPerson) => void,
-  onDelete: (person: IPerson) => void,
+  person?: IPerson,
+  onEdit?: (person: IPerson) => void,
+  onDelete?: (person: IPerson) => void,
+  isBusy?: boolean,
 }
 
-const Person: React.FC<PersonProps> = ({ person, onEdit, onDelete }: PersonProps) => {
+const Person: React.FC<PersonProps> = ({
+  person = {} as IPerson,
+  onEdit = null,
+  onDelete = null,
+  isBusy = false
+}: PersonProps) => {
   const [theme] = useTheme();
+  const imageClassNames: string = `w-20 h-20 object-cover rounded-full border-2 border-${Colors[theme].primary}`;
+
   return (
     <div className={`
       p-4
@@ -22,34 +31,37 @@ const Person: React.FC<PersonProps> = ({ person, onEdit, onDelete }: PersonProps
       bg-${Colors[theme].secondary}
     `}>
       <div className="flex justify-center md:justify-center -smt-16">
-        <img
-          alt="Profile"
-          className={`
-            w-20
-            h-20
-            object-cover
-            rounded-full
-            border-2
-            border-${Colors[theme].primary}
-          `}
-          src={`https://randomuser.me/api/portraits/med/men/${person.id}.jpg`}
-        />
+        {isBusy ? (
+          <div
+            className={classNames(imageClassNames, Colors[theme].shimmer)}
+          />
+        ) : (
+          <img
+            alt="Person"
+            className={imageClassNames}
+            src={`https://randomuser.me/api/portraits/med/men/${person.id}.jpg`}
+          />
+        )}
       </div>
       <div>
-        <h2 className={`
-          text-3xl
+        <h2 className={classNames(`
+          text-2xl
           font-semibold
-          pt-5
+          mt-5
           text-${Colors[theme].secondaryText}
-        `}>
+          h-8
+        `, { [Colors[theme].shimmer]: isBusy }
+        )}>
           {person.name}
         </h2>
-        <p className={`
-            text-lg
+        <p className={classNames(`
+            text-sm
             font-medium
             mt-2
             text-${Colors[theme].primaryText}
-          `}>
+            h-8
+          `, { [Colors[theme].shimmer]: isBusy }
+          )}>
           {person.profession}
         </p>
         
@@ -63,22 +75,27 @@ const Person: React.FC<PersonProps> = ({ person, onEdit, onDelete }: PersonProps
         text-${Colors[theme].tertiaryText}
         dark:text-${Colors[theme].primaryText}
       `}>
-        <Icon
-          type={IconType.DELETE}
-          onClick={(event) => { onDelete(person); }}
-          className={`
-            hover:text-${Colors[theme].tertiaryTextHover}
-            dark:hover:text-${Colors[theme].primaryTextHover}
-          `}
-        />
-        <Icon
-          type={IconType.EDIT}
-          onClick={(event) => { onEdit(person); }}
-          className={`
-            hover:text-${Colors[theme].tertiaryTextHover}
-            dark:hover:text-${Colors[theme].primaryTextHover}
-          `}
-        />
+        {onDelete && (
+          <Icon
+            type={IconType.DELETE}
+            onClick={(event) => { onDelete(person); }}
+            className={`
+              hover:text-${Colors[theme].tertiaryTextHover}
+              dark:hover:text-${Colors[theme].primaryTextHover}
+            `}
+          />
+        )}
+        
+        {onEdit && (
+          <Icon
+            type={IconType.EDIT}
+            onClick={(event) => { onEdit(person); }}
+            className={`
+              hover:text-${Colors[theme].tertiaryTextHover}
+              dark:hover:text-${Colors[theme].primaryTextHover}
+            `}
+          />
+        )}
       </div>
     </div>
   );

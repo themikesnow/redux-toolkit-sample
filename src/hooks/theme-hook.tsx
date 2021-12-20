@@ -8,5 +8,5 @@ export const useTheme = () => {
     setStoredValue(value);
   }
 
-  return [localStorage.getItem('theme'), setTheme] as const;
+  return [localStorage.getItem('theme') || 'light', setTheme] as const;
 }

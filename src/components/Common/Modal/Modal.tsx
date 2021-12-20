@@ -65,12 +65,12 @@ const Modal: React.FC<LogoProps> = ({ className = '', children, onOk, onCancel }
             {children}
           </div>
           <div className="p-3  mt-2 text-center space-x-4 md:block">
-            <Button onClick={onCancel}>
+            <Button onClick={(event) => { onCancel(); }}>
               Cancel
             </Button>
             <Button
               isPrimary
-              onClick={(event) => { onOk}
+              onClick={() => { onOk(); }}
             >
               OK
             </Button>

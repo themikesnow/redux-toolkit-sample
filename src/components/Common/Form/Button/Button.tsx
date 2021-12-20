@@ -11,7 +11,8 @@ interface ButtonProps {
 
 const Button: FC<ButtonProps> = ({ children, onClick  , isPrimary = false }: ButtonProps) => {
   const [theme] = useTheme();
-  const theclass = isPrimary ? `bg-${Colors[theme].primary} hover:bg-${Colors[theme].primaryHover} text-white` : 'text-gray-500 text-gray';
+  const theclass = isPrimary ? `bg-${Colors[theme].tertiary} hover:bg-${Colors[theme].tertiaryHover} text-white` 
+                    : `text-${Colors[theme].primaryText} hover:text-${Colors[theme].primaryTextHover} `;
   return (
     <button
       type="button"
