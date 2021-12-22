@@ -1,9 +1,10 @@
+import { useState } from 'react';
+import { useUpdatePersonMutation, useAddPersonMutation} from '../../personSlice';
 import classnames from 'classnames';
 
 import { useTheme } from '../../../../hooks/theme-hook'
 import { Colors } from '../../../../constants/Styles';
 
-// import Button from '../../../../components/Common/Form/Button/Button';
 import Modal from '../../../../components/Common/Modal/Modal';
 import Icon, { IconType } from '../../../../components/Common/Icon/Icon';
 import IPerson from '../../../../types/IPerson';
@@ -17,44 +18,104 @@ interface EditModalProps {
   onCancel: () => void,
 }
 
+
 const EditModal: React.FC<EditModalProps> = ({ className = '', person, onSave, onCancel }: EditModalProps) => {
   const [theme] = useTheme();
+  const [updatePerson] = useUpdatePersonMutation();
+  const [addPerson] = useAddPersonMutation();
+  
+  const [name, setName] = useState<string>(null);
+  const [profession, setProfession] = useState<string>(null);
+
+  const handleSave = () => {
+    const updatedPerson = {
+      id: person.id,
+      name: name === null ? person.name : name,
+      profession: profession === null ? person.profession : profession,
+      picture: ''
+    } as IPerson;
+
+    if (updatedPerson.id) {
+      updatePerson(updatedPerson);
+    } else {
+      addPerson(updatedPerson);
+    }
+    onSave(updatedPerson);
+  }
+
+
   if (!person) {
     return null;
   }
 
   return (
     <Modal
-      onOk={() => { onSave(person); }}
+      onOk={handleSave}
       onCancel={onCancel}
     >
       <div className="flex justify-center">
         <Icon
-          type={IconType.CONFIRM}
-          className={classnames('h-10 w-10', `text-${Colors[theme].tertiaryText}`)}
+          type={IconType.EDIT}
+          className={classnames('h-7 w-7', `text-${Colors[theme].tertiaryText}`)}
         />
       </div>
       <div className={`flex flex-col justify-center text-center text-${Colors[theme].primaryText}`}>
-        <h2 className={`text-xl font-bold py-4 pb-8 text-${Colors[theme].secondaryText}`}>Are you sure?</h2>
-        <p className={`text-sm px-8 pb-4}`}>
-          Do you really want to delete the below person?
-        </p>
-        <p className="text-sm px-8 pb-1 text-left">
-          <span className="inline-block w-48 text-right font-bold px-2">
-            Name:
-          </span>  
-          <span className="ws-40">
-            {person.name}
-          </span>
-        </p>
-        <p className="text-sm px-8 pb-4  text-left">
-          <span className="inline-block w-48 text-right font-bold px-2">
-          Profession:
-          </span>  
-          <span className="sw-56">
-            {person.profession}
-          </span>
-        </p>
+        <h2 className={`text-xl font-bold py-4 pb-8 text-${Colors[theme].secondaryText}`}>Details</h2>
+        
+      </div>
+
+      <div>
+        <input
+          className="
+            w-full
+            p-4
+            text-sm
+            bg-gray-50
+            focus:outline-none
+            border
+            border-gray-200
+            rounded
+            text-gray-600
+          "
+          type="text"
+          placeholder="Name"
+          value={name === null ? person.name : name}
+          onChange={(event) => {
+            setName(event.target.value || '');
+          }}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              handleSave();
+            }
+          }}
+        />
+
+        <input
+          className="
+            mt-3
+            mb-7
+            w-full
+            p-4
+            text-sm
+            bg-gray-50
+            focus:outline-none
+            border
+            border-gray-200
+            rounded
+            text-gray-600
+          "
+          type="text"
+          placeholder="Profession"
+          value={profession === null ? person.profession : profession}
+          onChange={(event) => {
+            setProfession(event.target.value);
+          }}
+          onKeyPress={(event) => {
+            if (event.key === 'Enter') {
+              handleSave();
+            }
+          }}
+        />
       </div>
     </Modal>
   );

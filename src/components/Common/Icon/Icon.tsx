@@ -1,5 +1,16 @@
 import React from 'react';
-import { MoonIcon, SunIcon, PencilIcon, TrashIcon, ExclamationCircleIcon } from '@heroicons/react/outline';
+import {
+  MoonIcon,
+  SunIcon,
+  PencilIcon,
+  TrashIcon,
+  ExclamationCircleIcon,
+  UserAddIcon,
+  TrendingUpIcon,
+  PlusIcon,
+  MinusIcon,
+  SpeakerphoneIcon
+} from '@heroicons/react/outline';
 import classnames from 'classnames';
 
 const defaultClass = 'h-5 w-5';
@@ -10,6 +21,11 @@ export enum IconType {
   DARK_THEME,
   DELETE,
   CONFIRM,
+  ADD_PERSON,
+  RANDOM_PERSONS,
+  PLUS,
+  MINUS,
+  ATTENTION
 }
 
 interface IconProps {
@@ -37,7 +53,21 @@ const Icon: React.FC<IconProps> = ({ type, onClick, className = '' }: IconProps)
     case IconType.CONFIRM:
       theIcon = <ExclamationCircleIcon className={classnames(defaultClass, {[className]: !!className })} />;
       break;
-      
+    case IconType.ADD_PERSON:
+      theIcon = <UserAddIcon className={classnames(defaultClass, {[className]: !!className })} />;
+      break;
+    case IconType.RANDOM_PERSONS:
+      theIcon = <TrendingUpIcon className={classnames(defaultClass, {[className]: !!className })} />;
+      break;
+    case IconType.PLUS:
+      theIcon = <PlusIcon className={classnames(defaultClass, {[className]: !!className })} />;
+      break;
+    case IconType.MINUS:
+      theIcon = <MinusIcon className={classnames(defaultClass, {[className]: !!className })} />;
+      break;
+    case IconType.ATTENTION:
+      theIcon = <SpeakerphoneIcon className={classnames(defaultClass, {[className]: !!className })} />;
+      break;
     default:
       return null;
   }

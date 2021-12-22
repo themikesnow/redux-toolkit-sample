@@ -1,44 +1,4 @@
 {
-  "persons": [
-    {
-      "name": "Lorenzo Lang",
-      "profession": "Human Infrastructure Director",
-      "id": 7
-    },
-    {
-      "name": "Theresa Kuphal",
-      "profession": "Forward Infrastructure Planner",
-      "id": 9
-    },
-    {
-      "name": "Amber Wilderman",
-      "profession": "Product Group Agent",
-      "id": 11
-    },
-    {
-      "name": "Dean Shanahan",
-      "profession": "Dynamic Directives Facilitator",
-      "id": 13
-    },
-    {
-      "name": "Cary Ryan",
-      "profession": "Internal Security Consultant",
-      "id": 15
-    },
-    {
-      "name": "Marshall Schneider",
-      "profession": "Global Paradigm Coordinator",
-      "id": 16
-    },
-    {
-      "name": "Deborah Beier",
-      "profession": "Chief Creative Designer",
-      "id": 17
-    },
-    {
-      "name": "Miss Sonia Champlin",
-      "profession": "Dynamic Markets Director",
-      "id": 18
-    }
+  "persons": [    
   ]
 }

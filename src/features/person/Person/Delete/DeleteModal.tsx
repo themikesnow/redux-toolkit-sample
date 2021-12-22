@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+import { useGetPersonsQuery, useDeletePersonMutation } from '../../personSlice';
 
 import { useTheme } from '../../../../hooks/theme-hook'
 import { Colors } from '../../../../constants/Styles';
@@ -15,18 +16,22 @@ interface DeleteModalProps {
   person: IPerson;
   onDelete: (person: IPerson) => void,
   onCancel: () => void,
-  // onClick?: (event: React.MouseEvent<HTMLElement>) => void,
 }
 
 const DeleteModal: React.FC<DeleteModalProps> = ({ className = '', person, onDelete, onCancel }: DeleteModalProps) => {
   const [theme] = useTheme();
+  const [deletePerson] = useDeletePersonMutation();
+
   if (!person) {
     return null;
   }
 
   return (
     <Modal
-      onOk={() => { onDelete(person); }}
+      onOk={() => {
+        deletePerson(person.id);
+        onDelete(person);
+      }}
       onCancel={onCancel}
     >
       <div className="flex justify-center">

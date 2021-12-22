@@ -5,7 +5,7 @@ export const Colors: { [key: string]: any } = {
     tertiary: 'indigo-500',
     primaryHover: 'indigo-700',
     secondaryHover: 'gray-400',
-    tertiaryHover: 'red-400',
+    tertiaryHover: 'indigo-400',
     primaryText: 'gray-400',
     secondaryText: 'gray-600',
     tertiaryText: 'indigo-500',

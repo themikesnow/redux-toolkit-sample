@@ -29,7 +29,14 @@ const Person: React.FC<PersonProps> = ({
       rounded-lg
       text-center
       bg-${Colors[theme].secondary}
+      relative
     `}>
+      <span className={`
+        pt-2 pl-3 absolute top-0 left-0 font-bold
+        text-${Colors[theme].primaryText}
+      `}>
+        {person.id}
+      </span>
       <div className="flex justify-center md:justify-center -smt-16">
         {isBusy ? (
           <div

@@ -26,10 +26,13 @@ export const personSlice = createApi({
 			invalidatesTags: ['Persons'],
 		}),
 		updatePerson: builder.mutation({
-			query: (id) => ({
-				url: `/persons/${id}`,
-				method: 'PUT',
-			}),
+			query: (body) => {
+				return ({
+					url: `/persons/${body.id}`,
+					method: 'PUT',
+					body,
+				})
+			},
 			invalidatesTags: ['Persons'],
 		}),
 		deletePerson: builder.mutation<{ success: Boolean; id: number }, number>({
